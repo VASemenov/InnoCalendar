@@ -1,5 +1,4 @@
-![](classDiagram.png){width="4.908083989501312in"
-height="6.567708880139983in"}
+![](classDiagram.png)
 
 ### Note
 

@@ -74,9 +74,97 @@ def attach_autoparser_module():
 
         return lesson, teacher, room
 
+    def electives_parse_cell(ws, row, col):
+        data = get_value(ws, row, col)
+
+        if not data or len(data) < 2:
+            return None, None, None  # empty cell
+
+        data = data.splitlines()
+
+        if len(data) < 3:
+            teacher = data[0]
+            room = data[1]
+            return "", teacher, room
+
+        lesson = data[0]
+        teacher = data[1]
+        room = data[2]
+
+        if not teacher:  # unknown teacher
+            teacher = '?'
+        try:
+            room = int(room)
+        except (TypeError, ValueError):
+            room = -1
+
+        return lesson, teacher, room
+
+    
     # specific Exception for download error
     class ScheduleDownloadError(Exception):
         pass
+
+
+    def get_all_electives_course_name(ws):
+        col = 5
+        while col <= permanent.ELECTIVES_SCHEDULE_LAST_COLUMN:
+            course_name = get_value(ws, 1, col)
+            col += 1
+
+    def electives_parse(compare_with_prev):
+        wb = load_workbook(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_NAME}')
+        ws = wb[wb.sheetnames[0]]
+        
+        # open workbook from backup
+        wb_old, ws_old = None, None
+        if compare_with_prev:
+            wb_old = load_workbook(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_BACKUP_1}')
+            ws_old = wb_old[wb_old.sheetnames[0]]
+
+        # TODO: add list of elective course name to database
+        get_all_electives_course_name(ws)
+
+        #iterate over each cell
+        col = 5
+        while col <= permanent.ELECTIVES_SCHEDULE_LAST_COLUMN:
+            course_name = get_value(ws, 1, col)
+
+            row = 2
+            while row <= permanent.ELECTIVES_SCHEDULE_LAST_ROW:
+                date = get_value(ws, row, 1)
+
+                cell_new = electives_parse_cell(ws, row, col)
+
+                if not cell_new[0]:
+                    row += 1
+                    continue
+
+                subject, teacher, room = cell_new[0], cell_new[1], cell_new[2]
+
+                time = get_value(ws, row, 4)
+                time_splitted = time.split('-')
+                start_time, end_time = time_splitted[0], time_splitted[1]
+
+                if compare_with_prev:
+                    # compare new cell with old one
+                    cell_old = electives_parse_cell(ws_old, row, col)
+                    if cell_new != cell_old:
+                        subject_old, teacher_old, room_old = cell_old[0], cell_old[1], cell_old[2]
+                        for admin in SUPERADMIN_LIST:
+                            # send changes to admin
+                            bot.send_message(admin, f"{course_group} {first_col_value} changed:\n"
+                                                    f"Was {subject_old}, {teacher_old}, {room_old}\n"
+                                                    f"Now {subject}, {teacher}, {room}\n")
+
+
+                # controller.insert_lesson(course_group, subject, teacher, cur_weekday, start_time, end_time, room)
+                # TODO: add elective course info to database
+                print("\nCourse: " + str(date) + " - " + str(subject) + " - " + str(teacher) + " - " + str(
+                    room) + " - " + str(start_time) + " - " + str(end_time))
+                row += 1
+            col += 1
+        print("Parse Elective Course Done")
 
     def parse_new_timetable():
         """
@@ -89,6 +177,9 @@ def attach_autoparser_module():
                         f"{DATABASE_FOLDER}/{permanent.DATABASE_BACKUP_2}")
             shutil.move(f"{DATABASE_FOLDER}/{permanent.SCHEDULE_BACKUP_1}",
                         f"{DATABASE_FOLDER}/{permanent.SCHEDULE_BACKUP_2}")
+            # add backup for electives schedule
+            shutil.move(f"{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_BACKUP_1}",
+                        f"{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_BACKUP_2}")
         except FileNotFoundError:
             pass
         compare_with_prev = True  # compare with previous version of database if such is found
@@ -98,6 +189,9 @@ def attach_autoparser_module():
                         f"{DATABASE_FOLDER}/{permanent.DATABASE_BACKUP_1}")
             shutil.move(f"{DATABASE_FOLDER}/{permanent.SCHEDULE_NAME}",
                         f"{DATABASE_FOLDER}/{permanent.SCHEDULE_BACKUP_1}")
+            # add backup for electives schedule
+            shutil.move(f"{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_NAME}",
+                        f"{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_BACKUP_1}")
         except FileNotFoundError:
             compare_with_prev = False
 
@@ -106,16 +200,29 @@ def attach_autoparser_module():
         with open(f'{DATABASE_FOLDER}/{permanent.SCHEDULE_NAME}', 'wb') as f:
             f.write(new_schedule.content)
 
+        # download new schedule from google sheet
+        electives_schedule = requests.get(permanent.ELECTIVES_SCHEDULE_DOWNLOAD_LINK)
+        with open(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_NAME}', 'wb') as f:
+            f.write(electives_schedule.content)
+
         try:
             # check download is ok
             schedule_size = shutil.os.path.getsize(f'{DATABASE_FOLDER}/{permanent.SCHEDULE_NAME}')
             if schedule_size < permanent.SCHEDULE_MIN_SIZE_BYTES:
+                raise ScheduleDownloadError
+
+            # check electives download 
+            electives_schedule_size = shutil.os.path.getsize(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_NAME}')
+            if electives_schedule_size < permanent.SCHEDULE_MIN_SIZE_BYTES:
                 raise ScheduleDownloadError
         except (FileNotFoundError, ScheduleDownloadError):
             # send error notification to admins
             for admin in SUPERADMIN_LIST:
                 bot.send_message(admin, permanent.MESSAGE_ERROR_NOTIFY)
             return
+
+        # Electives parse function
+        electives_parse(compare_with_prev)
 
         # delete all lessons because new ones will be parsed
         controller.delete_all_lessons()
@@ -190,4 +297,5 @@ def attach_autoparser_module():
     # open parse function to other modules
     attach_autoparser_module.parse_schedule_func = parse_new_timetable
     # add parse function call to schedule on each day
-    schedule.every().day.at(permanent.ADMIN_NOTIFY_TIME).do(parse_new_timetable)
+    # schedule.every().day.at(permanent.ADMIN_NOTIFY_TIME).do(parse_new_timetable)
+    parse_new_timetable()

@@ -14,6 +14,14 @@ SCHEDULE_MIN_SIZE_BYTES = 30 * 1024
 SCHEDULE_LAST_COLUMN = 36
 SCHEDULE_LAST_ROW = 134
 
+# Electives Permanent
+ELECTIVES_SCHEDULE_NAME = "electives_schedule.xlsx"
+ELECTIVES_SCHEDULE_BACKUP_1 = "electives_schedule.old.xlsx"
+ELECTIVES_SCHEDULE_BACKUP_2 = "electives_schedule.old.old.xlsx"
+ELECTIVES_SCHEDULE_DOWNLOAD_LINK = "https://drive.google.com/uc?export=download&id=1_GAd5s4nuHyyfzJ1PYXQR0exWm4vtAP3"
+ELECTIVES_SCHEDULE_LAST_COLUMN = 44
+ELECTIVES_SCHEDULE_LAST_ROW = 721
+
 MESSAGE_ERROR_NOTIFY = "Schedule parse error occurred. Please check manually."
 MESSAGE_ERROR_PARSE_SYNTAX = "Error during schedule parse with"
 MESSAGE_ERROR_UNKNOWN_GROUP = "Unknown group found in schedule"

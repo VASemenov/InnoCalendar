@@ -13,7 +13,7 @@ __pycache__/
 
 log
 
-modules/admin/
+modules/admin/permanent.py
 
 nohup\.out
 

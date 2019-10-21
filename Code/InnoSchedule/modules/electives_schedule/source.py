@@ -17,7 +17,7 @@ Authors: @Nmikriukov @thedownhill
 def attach_electives_schedule_module():
 
     @bot.message_handler(commands=['add_course'])
-    def add_cousre_handler(message):
+    def add_course_handler(message):
         """
         Register module's commands
         """

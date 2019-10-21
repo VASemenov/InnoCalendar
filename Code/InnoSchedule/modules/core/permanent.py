@@ -21,6 +21,7 @@ MESSAGE_HELP = "Schedule open platform for Innopolis students.\n\n" \
                "Some commands, that might be useful for you:\n" \
                "/configure_schedule - change group settings\n" \
                "/configure_remind - change reminders settings\n" \
+               "/add_course - add an elective course to your list of reminders\n" \
                "/friend - show current and next friend's lessons\n" \
                "   or you can just send his alias directly\n" \
                "/help\n\n" \

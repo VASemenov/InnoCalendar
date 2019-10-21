@@ -6,20 +6,35 @@ from sqlalchemy import Column, Integer, String, Table, ForeignKey, Boolean, Date
 from modules.core.source import Base
 
 
-class ElectivesUser(Base):
-    __tablename__ = "electives_users"
+# class ElectivesUser(Base):
+#     __tablename__ = "electives_users"
+#
+#     id = Column(Integer, primary_key=True)
+#     user_id = Column(String)
+#     subject = Column(String, ForeignKey('electives_lessons.subject'))
+#
+#     def __init__(self, user_id, subject):
+#         self.user_id = user_id
+#         self.subject = subject
+#
+#     def __repr__(self):
+#         return f"ElectivesUser({self.user_id}, {self.subject})"
 
-    id = Column(Integer, primary_key=True)
-    user_id = Column(String)
-    subject = Column(String, ForeignKey('electives_lessons.subject'))
-    
+class ElectivesUser(Base):
+    __tablename__ = 'electives_users'
+
+    # TODO: it should be primary key
+    id = Column(Integer)
+    user_id = Column(Integer)
+    # TODO: remove primary key
+    subject = Column(String, primary_key=True)
 
     def __init__(self, user_id, subject):
-        self.user_id = user_id
         self.subject = subject
+        self.user_id = user_id
 
     def __repr__(self):
-        return f"ElectivesUser({self.user_id}, {self.subject})"
+        return f"ElectivesUser({self.id},{self.subject}, {self.user_id})"
 
 
 class ElectivesLesson(Base):
@@ -27,7 +42,7 @@ class ElectivesLesson(Base):
 
     subject = Column(String, primary_key=True)
     info = relationship("ElectivesInfo", backref=backref("electives_lessons_info"))
-    user = relationship("ElectivesUser", backref=backref("electives_users"))
+    # user = relationship("ElectivesUser", backref=backref("electives_users"))
 
     def __init__(self, subject):
         self.subject = subject

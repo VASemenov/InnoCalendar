@@ -10,7 +10,7 @@ import schedule
 from modules.autoparser import controller
 from modules.autoparser import permanent
 from modules.core.permanent import DATABASE_FOLDER, DATABASE_NAME
-from modules.core.source import bot
+from modules.core.source import bot, main_markup
 from modules.schedule.permanent import REGISTERED_COURSES
 from modules.admin.permanent import SUPERADMIN_LIST
 
@@ -153,23 +153,27 @@ def attach_autoparser_module():
                 if compare_with_prev:
                     # compare new cell with old one
                     cell_old = electives_parse_cell(ws_old, row, col)
+
                     if cell_new != cell_old:
-                        subject_old, teacher_old, room_old = cell_old[0], cell_old[1], cell_old[2]
-                        for admin in SUPERADMIN_LIST:
-                            # send changes to admin
-                            bot.send_message(admin, f"{course_group} {first_col_value} changed:\n"
-                                                    f"Was {subject_old}, {teacher_old}, {room_old}\n"
-                                                    f"Now {subject}, {teacher}, {room}\n")
+                        users = controller.get_electives_user(subject)
 
+                        for user in users:
+                            if not cell_old[0]:
+                                # schedule added
+                                bot.send_message(user.user_id,
+                                                 f"- There is an additional schedule in {str(date)}, {str(start_time)}, {str(end_time)}:\n"
+                                                 f" {subject}, {teacher}, {room}\n")
+                            else:
+                                # schedule changed
+                                subject_old, teacher_old, room_old = cell_old[0], cell_old[1], cell_old[2]
+                                bot.send_message(user.user_id,
+                                                 f"- There is an update for your schedule in {str(date)}, {str(start_time)}, {str(end_time)}:\n"
+                                                 f"Was {subject_old}, {teacher_old}, {room_old}\n"
+                                                 f"Now {subject}, {teacher}, {room}\n")
 
-                # controller.insert_lesson(course_group, subject, teacher, cur_weekday, start_time, end_time, room)
-                # TODO: add elective course info to database
                 controller.insert_electives_lesson_info(subject, teacher, date, start_time, end_time, room)
-                # print("\nCourse: " + str(date) + " - " + str(subject) + " - " + str(teacher) + " - " + str(
-                #     room) + " - " + str(start_time) + " - " + str(end_time))
                 row += 1
             col += 1
-        print("Parse Elective Course Done")
 
     def parse_new_timetable():
         """

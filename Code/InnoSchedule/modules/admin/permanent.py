@@ -1,4 +1,4 @@
-token = ""
+token = "955309339:AAFc6cXGn3d4Ei98LeQhzFpv_uTiU0AWZzU"
 MODULE_NAME = "admin"
 
 MESSAGE_AMOUNT = "People registered: "

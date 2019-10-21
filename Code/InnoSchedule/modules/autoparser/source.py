@@ -111,6 +111,7 @@ def attach_autoparser_module():
         while col <= permanent.ELECTIVES_SCHEDULE_LAST_COLUMN:
             course_name = get_value(ws, 1, col)
             col += 1
+            controller.insert_electives_lesson(course_name)
 
     def electives_parse(compare_with_prev):
         wb = load_workbook(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_NAME}')
@@ -122,7 +123,10 @@ def attach_autoparser_module():
             wb_old = load_workbook(f'{DATABASE_FOLDER}/{permanent.ELECTIVES_SCHEDULE_BACKUP_1}')
             ws_old = wb_old[wb_old.sheetnames[0]]
 
-        # TODO: add list of elective course name to database
+
+        # delete and add new course name
+        controller.delete_all_electives_lessons()
+        controller.delete_all_electives_lesson_info()
         get_all_electives_course_name(ws)
 
         #iterate over each cell
@@ -160,8 +164,9 @@ def attach_autoparser_module():
 
                 # controller.insert_lesson(course_group, subject, teacher, cur_weekday, start_time, end_time, room)
                 # TODO: add elective course info to database
-                print("\nCourse: " + str(date) + " - " + str(subject) + " - " + str(teacher) + " - " + str(
-                    room) + " - " + str(start_time) + " - " + str(end_time))
+                controller.insert_electives_lesson_info(subject, teacher, date, start_time, end_time, room)
+                # print("\nCourse: " + str(date) + " - " + str(subject) + " - " + str(teacher) + " - " + str(
+                #     room) + " - " + str(start_time) + " - " + str(end_time))
                 row += 1
             col += 1
         print("Parse Elective Course Done")

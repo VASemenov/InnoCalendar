@@ -13,8 +13,14 @@ __pycache__/
 
 log
 
-modules/admin/permanent.py
+\admin/permanent.py
 
 nohup\.out
 
 .kateproject
+
+*.xlsx
+
+*.sqlite?
+
+Code/InnoSchedule/modules/admin/permanent.py

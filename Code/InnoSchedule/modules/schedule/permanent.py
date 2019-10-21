@@ -19,7 +19,7 @@ MESSAGE_FULL_WEEK = "bit.ly/2yXx8Au"
 MESSAGE_FREE_DAY = "No lessons on this day! Lucky you are!"
 MESSAGE_FRIEND_NOT_FOUND = "Sorry. Your friend is not registered.\nPlease tell him about our cool bot!"
 MESSAGE_ERROR = "Sorry, I did not understand you"
-MESSAGE_SETTINGS_SAVED = "Your schedule settings have been saved successfully!"
+MESSAGE_SETTINGS_SAVED = "Your schedule settings have been saved successfully! \nPlease use /add_course command to subscribe to other courses"
 
 REQUEST_COURSE = "What's your course?"
 REQUEST_GROUP = "What's your group?"

@@ -29,7 +29,7 @@ REQUEST_ALIAS = "What's your friend's alias?\n" \
 REQUEST_WEEKDAY = "Select day of the week"
 
 MESSAGE_UNKNOWN_LESSON = "Course is not found"
-MESSAGE_SUCCESS = "success"
+MESSAGE_SUCCESS = "The course has been successfully added!"
 
 HEADER_NOW = "\n"
 HEADER_NEXT = "\n"

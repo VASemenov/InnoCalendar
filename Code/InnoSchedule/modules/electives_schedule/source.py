@@ -24,15 +24,13 @@ def attach_electives_schedule_module():
         log(permanent.MODULE_NAME, message)
         if message.text == '/add_course':
             lessons = controller.get_electives_course()
-            lesson_list = []
+            options = telebot.types.ReplyKeyboardMarkup(True, False)
 
             for lesson in lessons:
-                lesson_list.append(lesson.subject)
+                line_list = telebot.types.KeyboardButton(lesson.subject)
+                options.row(line_list)
 
-            options = telebot.types.ReplyKeyboardMarkup(True, False)
-            options.add(*list(lesson_list))
-
-            reply = str("Select elective course")
+            reply = str("What course you want to add?")
             msg = bot.send_message(message.chat.id, reply, reply_markup=options)
             bot.register_next_step_handler(msg, process_electives)
 

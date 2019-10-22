@@ -24,9 +24,6 @@ MESSAGE_HELP = "Schedule open platform for Innopolis students.\n\n" \
                "/add_course - add an elective course to your list of reminders\n" \
                "/friend - show current and next friend's lessons\n" \
                "   or you can just send his alias directly\n" \
-               "/help\n\n" \
-               "Anyone could easily add his own functionality:\n" \
-               "https://gitlab.com/Louie_ru/InnoSchedule\n" \
-               "@Nmikriukov @thedownhill"
+               "/help - show current list of commands\n"
 MESSAGE_ERROR = "Sorry, I did not understand you"
 MESSAGE_UNKNOWN = "Unknown message from"

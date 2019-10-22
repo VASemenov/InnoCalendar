@@ -306,5 +306,4 @@ def attach_autoparser_module():
     # open parse function to other modules
     attach_autoparser_module.parse_schedule_func = parse_new_timetable
     # add parse function call to schedule on each day
-    # schedule.every().day.at(permanent.ADMIN_NOTIFY_TIME).do(parse_new_timetable)
-    parse_new_timetable()
+    schedule.every(2).hours.do(parse_new_timetable)

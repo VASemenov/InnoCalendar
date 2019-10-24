@@ -161,13 +161,13 @@ def attach_autoparser_module():
                             if not cell_old[0]:
                                 # schedule added
                                 bot.send_message(user.user_id,
-                                                 f"- There is an additional schedule in {str(date)}, {str(start_time)}, {str(end_time)}:\n"
+                                                 f"- There is an additional schedule in {date.strftime('%b %d %Y')}, {str(start_time)}-{str(end_time)}:\n"
                                                  f" {subject}, {teacher}, {room}\n")
                             else:
                                 # schedule changed
                                 subject_old, teacher_old, room_old = cell_old[0], cell_old[1], cell_old[2]
                                 bot.send_message(user.user_id,
-                                                 f"- There is an update for your schedule in {str(date)}, {str(start_time)}, {str(end_time)}:\n"
+                                                 f"- There is an additional schedule in {date.strftime('%b %d %Y')}, {str(start_time)}-{str(end_time)}:\n"
                                                  f"Was {subject_old}, {teacher_old}, {room_old}\n"
                                                  f"Now {subject}, {teacher}, {room}\n")
 

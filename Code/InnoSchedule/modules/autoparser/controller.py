@@ -55,11 +55,12 @@ def insert_electives_lesson_info(session, subject, teacher, day, start, end, roo
 @core.db_read
 def get_electives_user(session, subject):
     session.commit()
-    users_list = session.query(ElectivesUser).all()
+    users_list = session.query(ElectivesUser).filter_by(subject=subject)
 
-    users_need_remind = []
-    for user in users_list:
-        if str(user.subject) == str(subject):
-            users_need_remind.append(user)
+    return users_list
+    # users_need_remind = []
+    # for user in users_list:
+    #     if str(user.subject) == str(subject):
+    #         users_need_remind.append(user)
 
-    return users_need_remind
+    # return users_need_remind

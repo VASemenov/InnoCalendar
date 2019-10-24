@@ -25,9 +25,9 @@ class ElectivesUser(Base):
 
     # TODO: it should be primary key
     id = Column(Integer)
-    user_id = Column(Integer)
+    user_id = Column(Integer, primary_key=True)
     # TODO: remove primary key
-    subject = Column(String, primary_key=True)
+    subject = Column(String)
 
     def __init__(self, user_id, subject):
         self.subject = subject
@@ -72,3 +72,14 @@ class ElectivesInfo(Base):
 
     def __repr__(self):
         return f"ElectivesInfo({self.subject}, {self.day})"
+
+    def __str__(self):
+        """
+        Converts current lesson to string for easy output
+
+        :return: String
+        """
+        return f"{self.subject}\n"\
+               f"👨‍🏫 {self.teacher}\n"\
+               f"🕐 {self.start} 	— {self.end}\n" \
+               f"🚪 {self.room if self.room != -1 else '?'}\n"

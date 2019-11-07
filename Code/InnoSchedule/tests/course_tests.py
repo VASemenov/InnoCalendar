@@ -13,6 +13,7 @@ from modules.electives_schedule.source import attach_electives_schedule_module
 (add_course_handler, process_electives) = attach_electives_schedule_module()
 
 
+
 class TestCourseAttachment(unittest.TestCase):
     @parameterized.expand([
         (Message(from_user=User(first_name="Oleg", id=3847590291, is_bot=False,

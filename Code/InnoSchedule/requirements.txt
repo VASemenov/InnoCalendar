@@ -7,3 +7,4 @@ urllib3
 schedule
 file_read_backwards
 openpyxl
+parameterized==0.7.0

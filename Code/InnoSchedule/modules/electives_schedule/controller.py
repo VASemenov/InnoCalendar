@@ -59,11 +59,11 @@ def get_day_elective_lessons(session, user_id, day):
     :param day:  int [0-6]
     :return: [Lesson]
     """
-    monday = datetime.date.today() - datetime.timedelta(days=day-1)
+    monday = datetime.date.today() - datetime.timedelta(days=datetime.date.today().isoweekday()-1)
     this_week_dates = [monday]
     for i in range(1, 7):
         this_week_dates.append(monday + datetime.timedelta(i))
     all_user_electives = list(i[0] for i in session.query(ElectivesUser).filter_by(user_id=user_id).values('subject'))
-    today_lessons = set(session.query(ElectivesInfo).filter(ElectivesInfo.subject.in_(all_user_electives), func.DATE(ElectivesInfo.day).in_(this_week_dates)).values('subject', 'day'))
+    today_lessons = set(session.query(ElectivesInfo).filter(ElectivesInfo.subject.in_(all_user_electives), func.DATE(ElectivesInfo.day) == this_week_dates[day]).values('subject', 'day'))
 
     return sorted([i[0] for i in today_lessons])

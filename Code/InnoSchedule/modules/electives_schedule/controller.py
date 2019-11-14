@@ -1,4 +1,5 @@
 import datetime
+from datetime import datetime as dt
 from sqlalchemy import func
 
 from modules.electives_schedule.classes import ElectivesUser, ElectivesLesson, ElectivesInfo
@@ -16,7 +17,7 @@ def get_electives_course(session):
 def get_today_electives_courses(session, user_id):
     lessons = []
     courses = session.query(ElectivesUser.subject).filter_by(user_id=user_id).all()
-    day = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+    day = dt.today().replace(hour=0, minute=0, second=0, microsecond=0)
     today_electives = session.query(ElectivesInfo.subject, ElectivesInfo.day, ElectivesInfo.room,
                                     ElectivesInfo.teacher,
                                     ElectivesInfo.start, ElectivesInfo.end).all()

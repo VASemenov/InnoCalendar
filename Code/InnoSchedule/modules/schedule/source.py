@@ -15,7 +15,6 @@ Authors: @Nmikriukov @thedownhill
 
 
 def attach_schedule_module():
-
     @bot.message_handler(commands=['friend', 'configure_schedule'])
     def schedule_command_handler(message):
         """
@@ -111,8 +110,8 @@ def attach_schedule_module():
         bot.send_message(message.chat.id, permanent.MESSAGE_SETTINGS_SAVED, reply_markup=main_markup)
 
     @bot.message_handler(regexp=f"^({permanent.TEXT_BUTTON_NOW}|"
-                                f"{permanent.TEXT_BUTTON_DAY}|"
-                                f"{permanent.TEXT_BUTTON_WEEK})$")
+    f"{permanent.TEXT_BUTTON_DAY}|"
+    f"{permanent.TEXT_BUTTON_WEEK})$")
     def main_buttons_handler(message):
         """
         Handler for processing three main buttons requests
@@ -221,3 +220,5 @@ def attach_schedule_module():
             bot.send_message(message.chat.id, permanent.MESSAGE_FRIEND_NOT_FOUND, reply_markup=main_markup)
             return
         send_current_schedule(message.chat.id, friend.id)
+
+    return (schedule_command_handler, process_course_step, process_group_step)

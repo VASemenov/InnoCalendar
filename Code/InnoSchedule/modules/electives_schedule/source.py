@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import telebot
 
 from modules.electives_schedule import controller, permanent
@@ -15,7 +13,6 @@ Authors: @Nmikriukov @thedownhill
 
 
 def attach_electives_schedule_module():
-
     @bot.message_handler(commands=['add_course'])
     def add_course_handler(message):
         """
@@ -34,11 +31,12 @@ def attach_electives_schedule_module():
             msg = bot.send_message(message.chat.id, reply, reply_markup=options)
             bot.register_next_step_handler(msg, process_electives)
 
-
     def process_electives(message):
         check = controller.check_electives_course(message.text)
-        if check == True:
-            controller.set_electives_user(message.from_user.id ,message.text)
-            msg = bot.send_message(message.chat.id, permanent.MESSAGE_SUCCESS, reply_markup=main_markup)
+        if check:
+            controller.set_electives_user(message.from_user.id, message.text)
+            bot.send_message(message.chat.id, permanent.MESSAGE_SUCCESS, reply_markup=main_markup)
         else:
             bot.send_message(message.chat.id, permanent.MESSAGE_UNKNOWN_LESSON, reply_markup=main_markup)
+
+    return add_course_handler, process_electives

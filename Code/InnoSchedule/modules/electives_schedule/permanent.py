@@ -16,7 +16,7 @@ TEXT_BUTTON_WEEK = "WEEK 🗓️"
 MESSAGE_USER_NOT_CONFIGURED = "Sorry. I do not know your groups yet. 😥\n"\
                               "Please use /configure_schedule command to set it up"
 MESSAGE_FULL_WEEK = "bit.ly/2yXx8Au"
-MESSAGE_FREE_DAY = "No lessons on this day! Lucky you are!"
+MESSAGE_FREE_DAY_ELECTIVE = "No elective lessons on this day! Lucky you are!"
 MESSAGE_FRIEND_NOT_FOUND = "Sorry. Your friend is not registered.\nPlease tell him about our cool bot!"
 MESSAGE_ERROR = "Sorry, I did not understand you"
 MESSAGE_SETTINGS_SAVED = "Your schedule settings have been saved successfully!"

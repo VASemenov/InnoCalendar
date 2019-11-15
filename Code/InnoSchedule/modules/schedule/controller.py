@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from modules.electives_schedule.controller import get_today_electives_courses
 from modules.schedule.classes import User, Group
 from modules.core.source import db_read, db_write
 
@@ -19,6 +20,8 @@ def get_day_lessons(session, user_id, day):
     for group in user.groups:
         # filter lessons from user`s groups by given day
         lessons += list(filter(lambda lesson: lesson.day == day, group.lessons))
+    if day == datetime.today().weekday():
+        lessons.extend(get_today_electives_courses(user_id))
     return sorted(lessons)
 
 

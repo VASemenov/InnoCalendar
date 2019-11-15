@@ -4,6 +4,8 @@ import telebot
 
 from modules.schedule import controller, permanent
 from modules.core.source import bot, log, main_markup
+from modules.electives_schedule.permanent import MESSAGE_FREE_DAY_ELECTIVE
+from modules.electives_schedule.controller import get_day_elective_lessons
 
 """
 Module allows to set user's groups and get information about current and next lesson,
@@ -177,9 +179,14 @@ def attach_schedule_module():
         # get list of lessons for specified user and day
         schedule = controller.get_day_lessons(message.from_user.id,
                                               day=permanent.TEXT_DAYS_OF_WEEK.index(weekday))
+        elective_shedule = get_day_elective_lessons(message.from_user.id, day=permanent.TEXT_DAYS_OF_WEEK.index(weekday))
         # convert lessons to understandable string output
-        reply = permanent.MESSAGE_FREE_DAY if not schedule else \
+        reply = "Core Courses:\n"
+        reply += permanent.MESSAGE_FREE_DAY if not schedule else \
             permanent.HEADER_SEPARATOR.join(str(lesson) for lesson in schedule)
+        reply += '\nElectives:\n'
+        reply += (MESSAGE_FREE_DAY_ELECTIVE if not elective_shedule
+                  else permanent.HEADER_SEPARATOR.join(str(lesson) for lesson in elective_shedule))
         bot.send_message(message.chat.id, reply, reply_markup=main_markup)
 
     def process_friend_request_step(message):

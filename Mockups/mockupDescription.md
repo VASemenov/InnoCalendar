@@ -37,7 +37,7 @@ which the Mockups are based on:
 Mockup & description
 --------------------
 
-### Use Case: "Subscribe for an initial core program"
+([### Use Case: "Subscribe for an initial core program"](https://github.com/BritikovKI/InnoCalendar/blob/master/Code/InnoSchedule/modules/schedule/controller.py))
 
 > The purpose of this use case is that the student can choose the
 > initial core program. The student writes the command

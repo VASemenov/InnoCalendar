@@ -34,6 +34,13 @@ At the moment there are 7 modules:
 # Install and run
 
 ```
+1. Create your bot
+Write @BotFather on Telegram command '/newbot'
+Provide your bot's name and username
+Put your bot's token into admin/permanent 'token' parameter
+
+2. Install requirements and run your bot
 pip3 install -r requirements.txt
 python3 InnoSchedule.py
+
 ```

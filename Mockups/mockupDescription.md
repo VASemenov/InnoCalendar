@@ -38,6 +38,7 @@ Mockup & description
 --------------------
 
 ### Use Case: "Subscribe for an initial core program"
+[### Use Case: "Subscribe for an initial core program"](https://github.com/VASemenov/InnoCalendar/blob/master/Code/InnoSchedule/modules/schedule/source.py)
 
 > The purpose of this use case is that the student can choose the
 > initial core program. The student writes the command
@@ -62,6 +63,7 @@ Mockup & description
 > Figure 3
 
 ### Use Case: "Subscribe to a course"
+[### Use Case: "Subscribe to a course"](https://github.com/VASemenov/InnoCalendar/blob/822ce85b9efde3b0ccb1bba3cd61699d3140ae1c/Code/InnoSchedule/modules/electives_schedule/controller.py#L44)
 
 > By issuing the command "/add\_course", the student can add any course
 > offered by Innopolis University to the personal list. The bot responds
@@ -78,6 +80,7 @@ Mockup & description
 > Figure 5
 
 ### Use Case: "Receive notification"
+[### Use Case: "Receive notification"](https://github.com/VASemenov/InnoCalendar/blob/master/Code/InnoSchedule/modules/remind/controller.py)
 
 > The student receives a notification in case of time/place changes (see
 > Figure 6 and Figure 7). There is no input from the student.

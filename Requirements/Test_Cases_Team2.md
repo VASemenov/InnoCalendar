@@ -135,17 +135,19 @@ The range of implemented use cases allows the user to interact with the bot with
 
 # Test case matrix
 
-| **Subscribe for an initial core program** |
-| --- |
+**Subscribe for an initial core program**
+
 | **Step** | **Variable or selection** | TC1 | TC2 | TC3 | TC4 |
+| --- | --- | --- | --- | --- | --- |
 | **B1** | Name of bot | @InnoScheldue\_bot | @InnoScheldue\_bot | @InnoScheldue\_bot | @InnoScheldue\_bot |
 | **B2** | Click start button | /start | /start | /start | /start |
 | **B3** | Configure command | /configure | /cake | /configure | someStuff |
 | **B4** | Select core program | /configure | /cake | /configure | someStuff |
 
-| **Subscribe to a course** |
-| --- |
+**Subscribe to a course**
+
 | **Step** | **Variable or selection** | TC1 | TC2 | TC3 | TC4 |
+| --- | --- | --- | --- | --- | --- |
 | **B1** | Name of bot | @InnoScheldue\_bot | @InnoScheldue\_bot | @InnoScheldue\_bot | @InnoScheldue\_bot |
 | **B2** | Сlick &quot;Add new course&quot; button | Click on button | Write  Add new course in the Telegram | Click on button | someStuff |
 | **B3** | Select course | Advanced Python | Programming on Haskell | someStuff | someStuff |

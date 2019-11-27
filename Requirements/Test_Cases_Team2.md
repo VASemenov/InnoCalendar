@@ -133,14 +133,6 @@ The range of implemented use cases allows the user to interact with the bot with
 | **Tester:** | Abdoulie Kassama |
 | **Date Complete:** | 25.11.19 |
 
-# Use Case Interaction Matrix
-
-|   |   |   |   |
-| --- | --- | --- | --- |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
-
 # Test case matrix
 
 | **Subscribe for an initial core program** |

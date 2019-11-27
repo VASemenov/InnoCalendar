@@ -31,6 +31,7 @@ The range of implemented use cases allows the user to interact with the bot with
 
 
 # Use case testing
+<a href=https://github.com/VASemenov/InnoCalendar/blob/master/Requirements/Use_Cases_InnoCalendar_v2.0.docx>Use cases are taken from original ones.</a>
 
 **Use case:** Subscribe for an initial core program.
 

@@ -15,7 +15,7 @@ The range of implemented use cases allows the user to interact with the bot with
 
 # Resources
 
-**       ** For performing testing of use cases it is needed:
+For performing testing of use cases it is needed:
 
 1. ne personal computer, which performs the role of the server;
 2. ne personal computer and one mobile phone with appropriate applications (web browser, Telegram Desktop and Telegram mobile) installed for performing the role of the user;
@@ -76,15 +76,15 @@ The range of implemented use cases allows the user to interact with the bot with
 | **Priority:** | High |
 | **Setup:** | The user found the bot in his Telegram app |
 | **Teardown:** | Clean up database of bot and disabling the bot from test account |
-| **Step** | **Description** | **Result** | **Problem ID** |
-| TC-SC-01-A1 | User press &quot;Start&quot; button | Pass |   |
-| TC-SC-01-S2 | The bot send wellcome notification to user | Pass |   |
-| TC-SC-01-A3 | The user sends /configure\_schedule command | Pass |   |
-| TC-SC-01-S4 | The bot response with possible course names on control buttons | Pass |   |
-| TC-SC-01-A5 | The user press appropriate course button | Pass |   |
-| TC-SC-01-S5 | The bot asks users for appropriate course subgroup | Pass |   |
-|   |   | Pass |   |
-|   |   | Pass |   |
+| **Step** | **Description** |
+| TC-SC-01-A1 | User press &quot;Start&quot; button |
+| TC-SC-01-S2 | The bot send wellcome notification to user |
+| TC-SC-01-A3 | The user sends /add_course command |
+| TC-SC-01-S4 | The bot response with possible course names on control buttons |
+| TC-SC-01-A5 | The user press appropriate course button |
+| TC-SC-01-S5 | The bot asks users for appropriate course subgroup |
+|   |   |
+|   |   |
 | **Status:** | Passed |
 | **Tester:** | Abdoulie Kassama |
 | **Date Complete:** | 25.11.19 |

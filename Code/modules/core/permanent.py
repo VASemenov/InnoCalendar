@@ -1,5 +1,8 @@
+from os.path import dirname, abspath
+from os import path
+
 MODULE_NAME = "core"
-DATABASE_FOLDER = "modules/admin/db"
+DATABASE_FOLDER = path.join(abspath(dirname(dirname(dirname(path.realpath(__file__))))), "modules", "admin", "db")
 DATABASE_NAME = "db.sqlite3"
 
 LOG_FILE_NAME = 'log'

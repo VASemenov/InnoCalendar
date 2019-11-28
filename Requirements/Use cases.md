@@ -25,6 +25,10 @@ Team2, Members: Konstantin Britikov, Danil Afanasiev, Talgat Khaipov, Abdoulie K
 | **Alternative flow of event** | 1. The student cannot find InnoCalendar bot on telegram.<br />1.1 Student writes to the owners of the bot<br />3. Bot doesn’t start<br />3.1 Student checks internet connection<br />4(6). Student writes instead of clicking button<br />4(6).1 Bot says student what student should do |
 | **Post conditions**           | The Student is assigned to the core program.                 |
 
+**Implementation:** 
+[Subscribe to a core program](https://github.com/VASemenov/InnoCalendar/tree/master/Code/modules/core)\
+[Parrser for core schedule](https://github.com/VASemenov/InnoCalendar/tree/master/Code/modules/autoparser) 
+
 
 | Use case name                                | **Subscribe to a course**                                    |
 | -------------------------------------------- | ------------------------------------------------------------ |
@@ -35,6 +39,9 @@ Team2, Members: Konstantin Britikov, Danil Afanasiev, Talgat Khaipov, Abdoulie K
 | **Post conditions**                          | 1. System updates the changes<br />2. The Student is assigned to the selected course |
 | **Non-behavioural Requirements**             | Updates are consistent on personal message screen            |
 
+**Implementation:** 
+[Subscribe for elective course](https://github.com/VASemenov/InnoCalendar/tree/master/Code/modules/electives_schedule)
+
 | **Use Case name**   | **Receive notification**                                     |
 | ------------------- | ------------------------------------------------------------ |
 | **Actors**          | Students (primary), Bot(secondary)                           |
@@ -43,6 +50,9 @@ Team2, Members: Konstantin Britikov, Danil Afanasiev, Talgat Khaipov, Abdoulie K
 | **Post conditions** | The student got a notification                               |
 | **Assumptions**     | The student got a notification                               |
 
+**Implementation:**
+[Reminder for both core and elective corses](https://github.com/VASemenov/InnoCalendar/tree/master/Code/modules/remind)
+
 | **Use Case name**   | **Update schedule**                                          |
 | ------------------- | ------------------------------------------------------------ |
 | **Actors**          | Bot (Primary), UED schedule system (secondary)               |
@@ -50,3 +60,6 @@ Team2, Members: Konstantin Britikov, Danil Afanasiev, Talgat Khaipov, Abdoulie K
 | **Flow of event**   | 1. System checks for changes in University Education Department current semester program schedule. <br />2. The bot receives and records changes to the database. |
 | **Post conditions** | The system sends notifications about changes to the Students |
 | **Assumptions**     | 1. There will be no database outage, data loss, and leakage. <br />2. All course changes kept up to date<br />3. The system will update once in two hours from UED schedule system |
+
+**Implementation:**
+[Request to get update from spreadsheet](https://github.com/VASemenov/InnoCalendar/tree/master/Code/modules/autoparser/source.py#L212)

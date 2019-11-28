@@ -1,6 +1,6 @@
 # InnoCalendar telegram bot
 
-[@innocalendarv1_bot](https://t.me/innocalendarv1_bot)
+[@InnoScheduleTestDanilBot](https://t.me/InnoScheduleTestDanilBot)
 
 This bot is an extension of the original InnoSchedule bot (https://gitlab.com/Louie_ru/InnoSchedule/)
 

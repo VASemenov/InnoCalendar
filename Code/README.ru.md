@@ -3,7 +3,7 @@
 
 # InnoSchedule телеграм бот
 
-[@InnoSchedule_bot](https://t.me/InnoSchedule_bot)
+[@InnoScheduleTestDanilBot](https://t.me/InnoScheduleTestDanilBot)
 
 Этот бот написан для студентов университета Иннополис. Имеет модульную архитектуру, что позволяет любому желающему добавить свой модуль.
 
